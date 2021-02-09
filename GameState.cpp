@@ -29,7 +29,7 @@ bool GameState::match(char guess)
 	{
 		if (_word_in_play[i] == guess) 
 		{
-			_guessed[i] = (char) guess;
+			_guessed[i] = guess;
 			hits++;
 		} 
 	}

@@ -1,13 +1,18 @@
 # include <vector>
 # include <string>
 using namespace std;
+# include <iostream>
 # include <fstream>
 # include "Dictionary.h"
 
 
 
-void Dictionary::populateFromFile(ifstream& file)
+void Dictionary::populateFromFile()
 {
+	string file_name;
+	cout << "Please enter the name of the file with the extension: ";
+	cin >> file_name;
+	ifstream file(file_name);
 	string line;
 	file >> line;
 
@@ -20,9 +25,19 @@ void Dictionary::populateFromFile(ifstream& file)
 
 
 
-void Dictionary::populate(vector<string> v)
+void Dictionary::populate()
 {
-	_container = v;	
+	string usr_val;
+
+	cout << "Please enter a word to add to the dictionary. Type 'quit()' to finish entering." << endl;
+	// update this opening message before launching
+	cin >> usr_val;
+	while (usr_val != "quit()")
+	{
+		_container.push_back(usr_val);
+		cout << "Enter another value" << endl;
+		cin >> usr_val;
+	}	
 }
 
 

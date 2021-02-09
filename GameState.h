@@ -7,7 +7,7 @@ private:
 	string _word_in_play;
 	// the word to be guessed
 
-	vector<string> _guessed;
+	vector<char> _guessed;
 	// output shown to user after every guess (ex. _ _ _ if no letters guessed right or
 	// c _ _ for correctly guessing the letter c)	
 
@@ -20,7 +20,7 @@ private:
 
 public:
 	GameState(){}
-	// inline method, sets all data members to default C++ values
+	// inline method
 	
 	GameState(string);
 	// pre: the parameter will be the word the user needs to guess
@@ -30,14 +30,17 @@ public:
 
 	bool match(string);
 	// pre: assumes the GameState and Dictionary Objects have been instantiated. 
-	//      Parameter is the word or letter  the player just guessed
+	//      Parameter is the word the user just guessed
 	// post: returns true if the word guessed is correct and ends the game, or
 	//       returns false if not and decrements the number of attempts left,
-	//       adds to the words_incorrectly_guessed data member or to letters_incorrectly_guessed
-	//       depending on what the user entered
-	// desc: treats single-letter as guesses as strings, not chars
+	//       adds to the words_incorrectly_guessed data member
 	
 	bool match(char);
+	// pre: assumes the GameState and Dictionary Objects have been instantiated. 
+	//      Parameter is the letter the user just guessed
+	// post: returns true if the letter guessed is correct and ends the game, or
+	//       returns false if not and decrements the number of attempts left,
+	//       adds to the letters_incorrectly_guessed data member
 	
 
 

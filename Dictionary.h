@@ -8,18 +8,16 @@ private:
 public:
 	Dictionary(){}
 	// in-line method
-
-	void populateFromFile(ifstream&);
-	// pre: the parameter is expected to be a file object already populated with string values separated by white-space characters
-	// post: only adjusts pointer in the file to match where reading stopped, populates vector member variable of dictionary with
-	//       string values read from the file
-	// desc: will read all values from the file and store them in the vector data member of the dictionary
-
 	
-	void populate(vector<string>);
-	// pre: takes as a parameter a vector of strings gathered from user's console input
+	void populateFromFile();
+	// pre: none
+	// post: the _container vector will be populated with strings from a provided file
+	// desc: prompts user to enter a file name and extension that the method then reads
+	
+	void populate();
+	// pre: none 
 	// post: populates the vector data member of the dictionary with words entered by the user
-	// desc: populates the vector data member by setting it equal to the vector passed in
+	// desc: populates the vector data member by using a sentinel loop to gather user's words 
 	
 
 	string access();
