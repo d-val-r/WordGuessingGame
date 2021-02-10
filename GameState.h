@@ -7,7 +7,7 @@ private:
 	string _word_in_play;
 	// the word to be guessed
 
-	vector<char> _guessed;
+	vector<string> _guessed;
 	// output shown to user after every guess (ex. _ _ _ if no letters guessed right or
 	// c _ _ for correctly guessing the letter c)	
 
@@ -34,16 +34,16 @@ public:
 	// post: returns true if the word guessed is correct and ends the game, or
 	//       returns false if not and decrements the number of attempts left,
 	//       adds to the words_incorrectly_guessed data member
-	
-	bool match(char);
-	// pre: assumes the GameState and Dictionary Objects have been instantiated. 
-	//      Parameter is the letter the user just guessed
-	// post: returns true if the letter guessed is correct and ends the game, or
-	//       returns false if not and decrements the number of attempts left,
-	//       adds to the letters_incorrectly_guessed data member
-	
 
-
+	bool match(char);	
+	
+	string output() const;
+	// pre: none
+	// post: no changes to variables
+	// desc: returns a string representing the state of the guessed word
+	
+	void setWord(string);
+	// will restart the word game by getting a new word
 };
 
 
