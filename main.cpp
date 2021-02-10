@@ -17,6 +17,7 @@ int main()
 	
 
 
+	bool won;
 	int choice;
 	string guess;
 
@@ -30,6 +31,8 @@ int main()
 
 	while (choice != 0)
 	{
+
+
 		if (choice == 1)
 			dict.populate();
 		else
@@ -38,21 +41,26 @@ int main()
 		g.setWord(dict.access());
 
 
-		cout << "Take a guess: ";
-		cin >> guess;
+		won = false;
+		
 
-		if (guess.length() == 1)
+		while (g.getAttempts() != 0 && !won)
 		{
-			g.match(guess[0]);	
-			g.output();
-		}
-		else
-		{
+		
+			cout << "Take a guess: ";
+			cin >> guess;
 
-			if (g.match(guess))
+			if (guess.length() == 1)
+			{
+				g.match(guess[0]);	
+				g.output();
+			}
+			else if (g.match(guess))
 			{
 				cout << "you win!!!" << endl;
+				won = true;
 			}
+			
 		}
 
 

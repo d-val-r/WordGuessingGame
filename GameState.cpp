@@ -70,6 +70,14 @@ void GameState::setWord(string word)
 
 
 
+int GameState::getAttempts() const
+{
+	return _attempts_left;
+}
+
+
+
+
 
 string GameState::output() const 
 {

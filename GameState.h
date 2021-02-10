@@ -44,6 +44,11 @@ public:
 	
 	void setWord(string);
 	// will restart the word game by getting a new word
+	
+	
+	int getAttempts() const;
+	// returns user attempt count
+
 };
 
 
