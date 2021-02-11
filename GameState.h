@@ -7,7 +7,7 @@ private:
 	string _word_in_play;
 	// the word to be guessed
 
-	vector<string> _guessed;
+	string _guessed;
 	// output shown to user after every guess (ex. _ _ _ if no letters guessed right or
 	// c _ _ for correctly guessing the letter c)	
 
@@ -44,10 +44,29 @@ public:
 	
 	void setWord(string);
 	// will restart the word game by getting a new word
-	
+
+
+	void decrementAttempts();
+	// pre: none
+	// post: decrements _attempts_left by one	
 	
 	int getAttempts() const;
 	// returns user attempt count
+	
+	
+	int getIncorrecttLetters() const;
+	// placeholder 
+	
+	int getIncorrectWords() const;
+	// placeholder 
+	
+	string winWord() const;
+	// pre: none
+	// post: no changes to variables, returns current word to be guessed
+
+	string getStatus() const;
+	// pre: none
+	// post: no changes to variables, returns _guessed variable
 
 };
 
