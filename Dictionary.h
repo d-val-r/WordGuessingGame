@@ -9,7 +9,7 @@ public:
 	Dictionary(){}
 	// in-line method
 	
-	void populateFromFile();
+	void populateFromFile(ifstream&);
 	// pre: none
 	// post: the _container vector will be populated with strings from a provided file
 	// desc: prompts user to enter a file name and extension that the method then reads

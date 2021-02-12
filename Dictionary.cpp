@@ -7,18 +7,8 @@ using namespace std;
 
 
 
-void Dictionary::populateFromFile()
+void Dictionary::populateFromFile(ifstream& file)
 {
-	string file_name;
-	cout << "Please enter the name of the file with the extension: ";
-	cin >> file_name;
-	ifstream file(file_name);
-
-	if (!file)
-	{
-		cout << "error opening file" << endl;
-		exit(-1);
-	}
 
 	_container.clear();
 
@@ -37,17 +27,16 @@ void Dictionary::populateFromFile()
 void Dictionary::populate()
 {
 	string usr_val;
+	_container.clear();	
 
 	cout << "Please enter a word to add to the dictionary. Type 'quit()' to finish entering." << endl;
-	// update this opening message before launching
-	
-	_container.clear();	
-	
+	cout << "Enter a value: ";
 	cin >> usr_val;
+
 	while (usr_val != "quit()")
 	{
 		_container.push_back(usr_val);
-		cout << "Enter another value: ";
+		cout << "Enter a value: ";
 		cin >> usr_val;
 	}	
 }
