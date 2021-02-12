@@ -13,8 +13,8 @@ private:
 
 	// current state of the user's guessed word? ask what that means
 
-	vector<char> _letters_incorrectly_guessed;
-	vector<string> _words_incorrectly_guessed;
+	string _letters_incorrectly_guessed;
+	string _words_incorrectly_guessed;
 
 	int _attempts_left;
 
@@ -54,10 +54,10 @@ public:
 	// returns user attempt count
 	
 	
-	int getIncorrecttLetters() const;
+	string getIncorrectLetters() const;
 	// placeholder 
 	
-	int getIncorrectWords() const;
+	string getIncorrectWords() const;
 	// placeholder 
 	
 	string winWord() const;

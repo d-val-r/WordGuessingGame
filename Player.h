@@ -24,12 +24,12 @@ public:
 	// post: _name data member changed to match argument
 	
 
-	void setWins(int);
+	void incrementWins();
 	// pre: assumes only that the player object exists and that an int argument was entered
 	// post: sets the _number_of_wins data member to match the given argument 
 
 
-	void setLosses(int);
+	void incrementLosses();
 	// pre: assumes only that the player object exists and that an int argument was entered
 	// post: sets the _number_of_loses data member to match the given argument
 	

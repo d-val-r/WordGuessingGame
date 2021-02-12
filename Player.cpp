@@ -12,15 +12,15 @@ void Player::setName(string name)
 	_name = name;
 }
 
-void Player::setWins(int w)
+void Player::incrementWins()
 {
-	_num_of_wins = w;
+	_num_of_wins++;
 }
 
 
-void Player::setLosses(int l)
+void Player::incrementLosses()
 {
-	_num_of_losses = l;
+	_num_of_losses++;
 }
 
 

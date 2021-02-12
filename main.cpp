@@ -8,16 +8,17 @@ using namespace std;
 
 
 
-void printProgress(string guess, string name, int attempts)
+void printProgress(string guess, string name, int attempts, string words, string characters)
 {
 	for (int i = 0; i < guess.length(); i++)
 		cout << guess[i] << " ";
-	cout << "\n";
+	cout << "\n\n";
 
-	cout << name << ", you have " << attempts << " attempts left." << endl;
+	cout << name << ", you have " << attempts << " attempts left." << endl << endl;
 
-	cout << "Letters Incorrectly Guessed" << "\t" << "Words Incorrectly Guessed" << endl;
-
+	cout << "Words Incorrectly Guessed: "  << words << endl << endl;
+	cout << "Letters Incorrectly Guessed: " << characters << endl << endl;
+	
 }
 
 
@@ -25,7 +26,7 @@ void printProgress(string guess)
 {
 	for (int i = 0; i < guess.length(); i++)
 		cout << guess[i] << " ";
-	cout << "\n";
+	cout << "\n\n";
 }
 
 
@@ -57,7 +58,6 @@ int main()
 	while (choice != 0)
 	{
 
-
 		if (choice == 1)
 			dict.populate();
 		else
@@ -73,33 +73,38 @@ int main()
 				&& g.getStatus() != g.winWord())
 		{
 		
-			cout << "Take a guess: ";
+			cout << "Your guess: ";
 			cin >> guess;
 			g.decrementAttempts();
 			if (guess.length() == 1)
 			{
 				g.match(guess[0]);	
-				printProgress(g.getStatus(), p.getName(), g.getAttempts());	
+				printProgress(g.getStatus(), p.getName(), g.getAttempts(), g.getIncorrectWords(), g.getIncorrectLetters());
 			}
 			else if (g.match(guess))
 			{
-				cout << "you win!!!" << endl;
 				won = true;
+			} else
+			{	
+				printProgress(g.getStatus(), p.getName(), g.getAttempts(), g.getIncorrectWords(), g.getIncorrectLetters());
 			}
-
 			
 		}
 
 		
-		if (g.getStatus() == g.winWord())
+		if (g.getStatus() == g.winWord() || won)
 		{
-			// placeholder message
-			cout << "you win!" << endl;
+			p.incrementWins();
+			cout << "Congratulations! You win!" << endl;
+			cout << "Wins" << "\t" << "Losses" << endl;
+			cout << p.getWins() << "\t" << p.getLosses() << endl;
 		} else if (g.getAttempts() == 0 && !won)
 		{
-			// placeholder message
-			cout << "Loser" << endl;
-			cout << g.winWord() << endl;
+			p.incrementLosses();
+			cout << "Not quite! The word was " << g .winWord() << endl;
+			cout << "Wins" << "\t" << "Losses" << endl;
+			cout << p.getWins() << "\t" << p.getLosses() << endl << endl;
+
 		}
 
 

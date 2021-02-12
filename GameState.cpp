@@ -11,8 +11,6 @@ GameState::GameState(string word)
 	_attempts_left = word.length();
 	for (int i = 0; i < word.length(); i++)
 		_guessed += "_";
-	
-
 }
 
 
@@ -21,7 +19,8 @@ bool GameState::match(string guess)
 	if (guess == _word_in_play)
 		return true;
 
-	_words_incorrectly_guessed.push_back(guess);
+	_words_incorrectly_guessed += guess;
+	_words_incorrectly_guessed += ", ";
 	return false;
 }
 
@@ -108,4 +107,17 @@ string GameState::getStatus() const
 string GameState::winWord() const
 {
 	return _word_in_play;
+}
+
+
+
+string GameState::getIncorrectWords() const
+{
+	return _words_incorrectly_guessed;
+}
+
+
+string GameState::getIncorrectLetters() const
+{
+	return _letters_incorrectly_guessed;
 }
