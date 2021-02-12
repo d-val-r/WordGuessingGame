@@ -1,5 +1,6 @@
 # include <iostream>
 # include <vector>
+# include <fstream>
 using namespace std;
 # include "Dictionary.h"
 # include "Player.h"
@@ -45,6 +46,7 @@ int main()
 	bool won;
 	int choice;
 	string guess;
+	string file_name;
 
 	GameState g;
 
@@ -60,8 +62,20 @@ int main()
 
 		if (choice == 1)
 			dict.populate();
+		
 		else
-			dict.populateFromFile();
+		{
+			cout << "Please enter the name of the file with the extension: ";
+			cin >> file_name;
+			ifstream file(file_name);
+
+			if (!file)
+			{
+				cout << "error opening file" << endl;
+				exit(-1);
+			}
+			dict.populateFromFile(file);
+		}
 
 		g.setWord(dict.access());
 
@@ -95,7 +109,7 @@ int main()
 		if (g.getStatus() == g.winWord() || won)
 		{
 			p.incrementWins();
-			cout << "Congratulations! You win!" << endl;
+			cout << "Congratulations, " << p.getName()  <<  ", you win!" << endl;
 			cout << "Wins" << "\t" << "Losses" << endl;
 			cout << p.getWins() << "\t" << p.getLosses() << endl;
 		} else if (g.getAttempts() == 0 && !won)
