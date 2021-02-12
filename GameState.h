@@ -20,7 +20,6 @@ private:
 
 public:
 	GameState(){}
-	// inline method
 	
 	GameState(string);
 	// pre: the parameter will be the word the user needs to guess

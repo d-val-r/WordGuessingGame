@@ -20,7 +20,7 @@ bool GameState::match(string guess)
 		return true;
 
 	_words_incorrectly_guessed += guess;
-	_words_incorrectly_guessed += ", ";
+	_words_incorrectly_guessed += " ";
 	return false;
 }
 
@@ -44,7 +44,8 @@ bool GameState::match(char guess)
 
 	if (hits == 0) 
 	{
-		_letters_incorrectly_guessed.push_back(guess);
+		_letters_incorrectly_guessed += guess;
+		_letters_incorrectly_guessed += " ";
 		return false;
 	} else
 		return true;
