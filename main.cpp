@@ -8,12 +8,22 @@ using namespace std;
 
 
 
-
-void printProgress(string guess, string name, int attempts, string words, string characters)
-// pre: expects parameters
-// post: formats and prints out the number of attempts as well as the
-//       list of words/letters user incorrectly guessed
+//g.getStatus(), p.getName(), g.getAttempts(), g.getIncorrectWords(), g.getIncorrectLetters())
+void printProgress(GameState& g, string name)
+// pre: parameters are a GameState object and a name to refer to the player by 
+// post: no changes to variables 
+// desc: gets data from the GameState object and formats and prints 
+//       out the number of attempts, the state of the word to be guessed, 
+//       as well as the list of words/letters user 
+//       incorrectly guessed
+	
 {
+	
+	string guess = g.getStatus();
+	int attempts = g.getAttempts();
+	string words = g.getIncorrectWords();
+	string characters = g.getIncorrectLetters();
+
 	for (int i = 0; i < guess.length(); i++)
 		cout << guess[i] << " ";
 	cout << "\n\n";
@@ -27,13 +37,38 @@ void printProgress(string guess, string name, int attempts, string words, string
 
 void printProgress(string guess)
 // pre: parameter is the current status of the guessed word
-// post: formats and prints out the status of the guessed word
+// post: no changes to variables
+// desc: formats and prints out the status of the guessed word
 {
 	for (int i = 0; i < guess.length(); i++)
 		cout << guess[i] << " ";
 	cout << "\n\n";
 }
 
+
+
+void printWin(Player& p)
+// pre: parameter is a reference to a Player object
+// post: no changes to variables
+// desc: gathers relevant user data and formats/prints it 
+//       after a user wins a round
+{
+	cout << "Congratulations, " << p.getName()  <<  ", you win!" << endl;
+	cout << "Wins" << "\t" << "Losses" << endl;
+	cout << p.getWins() << "\t" << p.getLosses() << endl;
+	cout << "\n\n";	
+}
+
+void printLoss(Player& p, string win_word)
+// pre: parameter is a reference to a Player object and the word to be guessed
+// post: no changes to variables
+// desc: gathers relevant user data and formats/prints it after a user
+//       loses a round
+{
+	cout << "Not quite! The word was " << win_word << endl;
+	cout << "Wins" << "\t" << "Losses" << endl;
+	cout << p.getWins() << "\t" << p.getLosses() << endl << endl;
+}
 
 int main()
 {
@@ -48,7 +83,10 @@ int main()
 
 
 	bool won;
+
+	// user's choice of how to select words (or quit)
 	int choice;
+
 	string guess;
 	string file_name;
 
@@ -109,14 +147,18 @@ int main()
 				// so get the first (and only) character of 
 				// the string with indexing, which returns a char
 				g.match(guess[0]);	
-				printProgress(g.getStatus(), p.getName(), g.getAttempts(), g.getIncorrectWords(), g.getIncorrectLetters());
+				printProgress(g, p.getName());
 			}
 			else if (g.match(guess))
+				// user has entered a string and guessed 
+				// correctly
 			{
 				won = true;
 			} else
 			{	
-				printProgress(g.getStatus(), p.getName(), g.getAttempts(), g.getIncorrectWords(), g.getIncorrectLetters());
+				// user has entered a string and guessed
+				// incorrectly
+				printProgress(g, p.getName());
 			}
 			
 		}
@@ -126,17 +168,11 @@ int main()
 		if (g.getStatus() == g.getWinWord() || won)
 		{
 			p.incrementWins();
-			cout << "Congratulations, " << p.getName()  <<  ", you win!" << endl;
-			cout << "Wins" << "\t" << "Losses" << endl;
-			cout << p.getWins() << "\t" << p.getLosses() << endl;
-			cout << "\n\n";	
+			printWin(p);
 		} else if (g.getAttempts() == 0 && !won)
 		{
 			p.incrementLosses();
-			cout << "Not quite! The word was " << g.getWinWord() << endl;
-			cout << "Wins" << "\t" << "Losses" << endl;
-			cout << p.getWins() << "\t" << p.getLosses() << endl << endl;
-
+			printLoss(p, g.getWinWord());
 		}
 
 
