@@ -1,3 +1,8 @@
+/*
+CSCE 306, Assignment 1
+Dictionary class, written by David Rudenya
+*/
+
 # include <vector>
 # include <string>
 using namespace std;
@@ -11,6 +16,7 @@ void Dictionary::populateFromFile(ifstream& file)
 {
 
 	_container.clear();
+	// ensures no words present in _container
 
 	string line;
 	file >> line;
@@ -27,6 +33,7 @@ void Dictionary::populateFromFile(ifstream& file)
 void Dictionary::populate()
 {
 	_container.clear();	
+	// ensure no words present in _container
 	
 	string usr_val;
 
@@ -46,6 +53,8 @@ void Dictionary::populate()
 
 string Dictionary::access()
 {
-	string return_value = _container[rand() % _container.size()];
+	string return_value = "";
+	if (_container.size() != 0)	
+		return_value = _container[rand() % _container.size()];
 	return return_value;
 }

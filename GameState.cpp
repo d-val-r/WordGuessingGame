@@ -1,3 +1,8 @@
+/*
+CSCE 306, Assignment 1
+GameState class, written by David Rudenya
+*/
+
 # include <iostream>
 # include <string>
 # include <vector>
@@ -61,18 +66,25 @@ bool GameState::match(char guess)
 
 
 
-void GameState::setWord(string word)
+bool GameState::setWord(string word)
 {
-	_guessed = "";
-	_letters_incorrectly_guessed = "";
-	_words_incorrectly_guessed = "";
-
-
+	
 	_word_in_play = word;
-	_attempts_left = word.length();
-	for (int i = 0; i < word.length(); i++)
-		_guessed += "_";
+	if (word != "")
+	{	
+		_guessed = "";
+		_letters_incorrectly_guessed = "";
+		_words_incorrectly_guessed = "";
 
+
+		_attempts_left = word.length();
+		for (int i = 0; i < word.length(); i++)
+			_guessed += "_";
+		
+		return true;
+	}
+
+	return false;
 }
 
 

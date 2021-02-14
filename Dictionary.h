@@ -1,3 +1,9 @@
+/*
+CSCE 306, Assignment 1
+Dictionary headers, written by David Rudenya
+*/
+
+
 # ifndef DICTIONARY_H_
 # define DICTOINARY_H_
 
@@ -28,11 +34,8 @@ public:
 	// pre: expects the vector data member to have been populated by 
 	//      either populate() or populateFromFile()
 	// post: returns a randomly-chosen string from the vector data member
+	//       or an empty string if the user never enters any values 
 	
 };
-
-
-
-
 
 # endif

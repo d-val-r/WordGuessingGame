@@ -1,3 +1,9 @@
+/*
+CSCE 306, Assignment 1
+Main file of Assignment 1, written by David Rudenya
+*/
+
+
 # include <iostream>
 # include <vector>
 # include <fstream>
@@ -8,8 +14,7 @@ using namespace std;
 
 
 
-//g.getStatus(), p.getName(), g.getAttempts(), g.getIncorrectWords(), g.getIncorrectLetters())
-void printProgress(GameState& g, string name)
+void printProgress(GameState& g, string name) 
 // pre: parameters are a GameState object and a name to refer to the player by 
 // post: no changes to variables 
 // desc: gets data from the GameState object and formats and prints 
@@ -35,10 +40,11 @@ void printProgress(GameState& g, string name)
 }
 
 
-void printProgress(string guess)
+void printProgress(string guess) 
 // pre: parameter is the current status of the guessed word
 // post: no changes to variables
-// desc: formats and prints out the status of the guessed word
+// desc: overloaded function, formats and prints only the status of the 
+//       user's guessed word
 {
 	for (int i = 0; i < guess.length(); i++)
 		cout << guess[i] << " ";
@@ -47,7 +53,7 @@ void printProgress(string guess)
 
 
 
-void printWin(Player& p)
+void printWin(Player& p) 
 // pre: parameter is a reference to a Player object
 // post: no changes to variables
 // desc: gathers relevant user data and formats/prints it 
@@ -59,7 +65,7 @@ void printWin(Player& p)
 	cout << "\n\n";	
 }
 
-void printLoss(Player& p, string win_word)
+void printLoss(Player& p, string win_word) 
 // pre: parameter is a reference to a Player object and the word to be guessed
 // post: no changes to variables
 // desc: gathers relevant user data and formats/prints it after a user
@@ -118,69 +124,72 @@ int main()
 			}
 			
 			dict.populateFromFile(file);
-		}
-
-		// sets a word for the user to guess
-		g.setWord(dict.access());
-		
-
-		won = false;
-
-
-		// prints dashes to represent length of the word
-		printProgress(g.getStatus());	
-
-		// loop continues while attempts are not exhausted, the user
-		// has not guessed the right word, and while the characters
-		// guessed do not spell out the correct word
-		while (g.getAttempts() > 0 && !won 
-				&& g.getStatus() != g.getWinWord())
-		{
-		
-			cout << "Guess a word or a letter: ";
-			cin >> guess;
-			cout << "\n\n";
-			g.decrementAttempts();
-			if (guess.length() == 1)
-			{
-				// user has entered a character, not a word,
-				// so get the first (and only) character of 
-				// the string with indexing, which returns a char
-				g.match(guess[0]);	
-				printProgress(g, p.getName());
-			}
-			else if (g.match(guess))
-				// user has entered a string and guessed 
-				// correctly
-			{
-				won = true;
-			} else
-			{	
-				// user has entered a string and guessed
-				// incorrectly
-				printProgress(g, p.getName());
-			}
+		}	
 			
-		}
-
-		// checks if the above loop exited due to a win condition,
-		// as opposed to the user running out of attempts
-		if (g.getStatus() == g.getWinWord() || won)
+		
+		// sets a word for the user to guess and checks if the 
+		// word was an empty string (would return false if so)
+		if (g.setWord(dict.access()))
 		{
-			p.incrementWins();
-			printWin(p);
-		} else if (g.getAttempts() == 0 && !won)
-		{
-			p.incrementLosses();
-			printLoss(p, g.getWinWord());
-		}
+		
+			won = false;
+			
 
+			// prints dashes to represent length of the word
+			printProgress(g.getStatus());	
+
+			// loop continues while attempts are not exhausted, the user
+			// has not guessed the right word, and while the characters
+			// guessed do not spell out the correct word
+			while (g.getAttempts() > 0 && !won 
+					&& g.getStatus() != g.getWinWord())
+			{
+			
+				cout << "Guess a word or a letter: ";
+				cin >> guess;
+				cout << "\n\n";
+				g.decrementAttempts();
+				if (guess.length() == 1)
+				{
+					// user has entered a character, not a word,
+					// so get the first (and only) character of 
+					// the string with indexing, which returns a char
+					g.match(guess[0]);	
+					printProgress(g, p.getName());
+				}
+				else if (g.match(guess))
+					// user has entered a string and guessed 
+					// correctly
+				{
+					won = true;
+				} else
+				{	
+					// user has entered a string and guessed
+					// incorrectly
+					printProgress(g, p.getName());
+				}
+				
+			}
+
+			// checks if the above loop exited due to a win condition,
+			// as opposed to the user running out of attempts
+			if (g.getStatus() == g.getWinWord() || won)
+			{
+				p.incrementWins();
+				printWin(p);
+			} else if (g.getAttempts() == 0 && !won)
+			{
+				p.incrementLosses();
+				printLoss(p, g.getWinWord());
+			}
+
+		}	
 
 		cout << "To play again, enter either 1 to enter words ";
 		cout << "to guess or 2 to read words from a file." << endl;
 		cout << "Enter 0 to quit the game." << endl;
 		cin >> choice;
-	}	
-
+			
+	}
 	return 0;
 }

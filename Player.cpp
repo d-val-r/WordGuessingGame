@@ -1,3 +1,8 @@
+/*
+CSCE 306, Assignment 1
+Player class, written by David Rudenya
+*/
+
 # include <string>
 using namespace std;
 # include "Player.h"
