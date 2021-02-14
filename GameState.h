@@ -8,10 +8,8 @@ private:
 	// the word to be guessed
 
 	string _guessed;
-	// output shown to user after every guess (ex. _ _ _ if no letters guessed right or
-	// c _ _ for correctly guessing the letter c)	
-
-	// current state of the user's guessed word? ask what that means
+	// output shown to user after every guess (ex. _ _ _ if no 
+	// letters guessed right or c _ _ for correctly guessing the letter c)	
 
 	string _letters_incorrectly_guessed;
 	string _words_incorrectly_guessed;
@@ -24,48 +22,55 @@ public:
 	GameState(string);
 	// pre: the parameter will be the word the user needs to guess
 	// post: saves the parameter to the _word_in_play data member
-	// desc: sets the _attempts_left data member equal to the length of the parameter	
+	// desc: sets the _attempts_left data member equal to the length of 
+	//       the parameter	
 	
 
 	bool match(string);
-	// pre: assumes the GameState and Dictionary Objects have been instantiated. 
-	//      Parameter is the word the user just guessed
-	// post: returns true if the word guessed is correct and ends the game, or
-	//       returns false if not and decrements the number of attempts left,
-	//       adds to the words_incorrectly_guessed data member
+	// pre:  the parameter is the word the user just guessed
+	// post: returns true if the word guessed is correct 
+	//       and decrements the number of attempts left and, if the guess
+	//       was incorrect, also appends the word to words_incorrectly_guessed
 
-	bool match(char);	
-	
-	string output() const;
-	// pre: none
-	// post: no changes to variables
-	// desc: returns a string representing the state of the guessed word
+	bool match(char);
+	// pre: the parameter is the character the user just guessed
+	// post: returns true if the character guessed is in the 
+	//       _word_in_play data member and decrements attempts, and,
+	//       if the guess was incorrect, also appends the character
+	//       to _letters_incorrectly_guessed
 	
 	void setWord(string);
-	// will restart the word game by getting a new word
-
+	// pre: the parameter is the word that needs to be guessed
+	// post: sets _word_in_play to the argument provided
+	// desc: will clear the _guessed, _words_incorrectly_guessed,
+	//       and _letters_incorrectly_guessed variables to start a new 
+	//       game without requiring a new GameState object to be instantiated
 
 	void decrementAttempts();
 	// pre: none
 	// post: decrements _attempts_left by one	
 	
 	int getAttempts() const;
-	// returns user attempt count
+	// pre: none
+	// post: returns _attempts_left 
 	
 	
 	string getIncorrectLetters() const;
-	// placeholder 
-	
-	string getIncorrectWords() const;
-	// placeholder 
-	
-	string winWord() const;
 	// pre: none
-	// post: no changes to variables, returns current word to be guessed
+	// post: returns _letters_incorrectly_guessed
+	
+
+	string getIncorrectWords() const;
+	// pre: none
+	// post: returns _words_incorrectly_guessed
+	
+	string getWinWord() const;
+	// pre: none
+	// post: returns _word_in_play 
 
 	string getStatus() const;
 	// pre: none
-	// post: no changes to variables, returns _guessed variable
+	// post: returns _guessed 
 
 };
 

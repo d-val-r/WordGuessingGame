@@ -11,6 +11,8 @@ GameState::GameState(string word)
 	_attempts_left = word.length();
 	for (int i = 0; i < word.length(); i++)
 		_guessed += "_";
+	// stores dashes in the _guessed variable that will
+	// be replaced by correclty guessed letters
 }
 
 
@@ -29,9 +31,12 @@ bool GameState::match(string guess)
 bool GameState::match(char guess)
 {
 
-	// make sure to check, either here or in main, if the player still has attempts left
 	int hits = 0;
-		
+	
+
+	// loop to find all instances of the guessed character in
+	// _word_in_play
+	
 	for (int i = 0; i < _word_in_play.length(); i++)
 	{
 		if (guess == _word_in_play[i])
@@ -41,11 +46,14 @@ bool GameState::match(char guess)
 		} 
 	}
 
-
+	// if the letter never occured in the word
 	if (hits == 0) 
 	{
 		_letters_incorrectly_guessed += guess;
+
 		_letters_incorrectly_guessed += " ";
+		// separates words with a space
+
 		return false;
 	} else
 		return true;
@@ -56,8 +64,8 @@ bool GameState::match(char guess)
 void GameState::setWord(string word)
 {
 	_guessed = "";
-	_letters_incorrectly_guessed.clear();
-	_words_incorrectly_guessed.clear();
+	_letters_incorrectly_guessed = "";
+	_words_incorrectly_guessed = "";
 
 
 	_word_in_play = word;
@@ -82,30 +90,14 @@ int GameState::getAttempts() const
 }
 
 
-
-
-
-string GameState::output() const 
-{
-	string retVal = "";
-
-	for (int i = 0; i < _guessed.length(); i++)
-	{	retVal += _guessed[i]; 
-		retVal += " ";
-	}
-	return retVal;	
-	
-}
-
-
-
 string GameState::getStatus() const
 {
-	string retVal = _guessed.substr(0, _guessed.length() - 1);
+	string retVal = _guessed;
+
 	return _guessed; 
 }
 
-string GameState::winWord() const
+string GameState::getWinWord() const
 {
 	return _word_in_play;
 }

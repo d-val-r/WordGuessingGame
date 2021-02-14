@@ -26,14 +26,16 @@ void Dictionary::populateFromFile(ifstream& file)
 
 void Dictionary::populate()
 {
-	string usr_val;
 	_container.clear();	
+	
+	string usr_val;
 
-	cout << "Please enter a word to add to the dictionary. Type 'quit()' to finish entering." << endl;
+	cout << "Please enter a word to add to the dictionary. ";
+	cout << "Type 'qq' to finish entering." << endl;
 	cout << "Enter a value: ";
 	cin >> usr_val;
 
-	while (usr_val != "quit()")
+	while (usr_val != "qq")
 	{
 		_container.push_back(usr_val);
 		cout << "Enter a value: ";
