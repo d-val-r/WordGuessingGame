@@ -31,10 +31,9 @@ public:
 	
 
 	string access();
-	// pre: expects the vector data member to have been populated by 
-	//      either populate() or populateFromFile()
+	// pre: none
 	// post: returns a randomly-chosen string from the vector data member
-	//       or an empty string if the user never enters any values 
+	//       or an empty string if the vector is emtpy
 	
 };
 

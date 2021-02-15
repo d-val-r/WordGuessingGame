@@ -66,25 +66,19 @@ bool GameState::match(char guess)
 
 
 
-bool GameState::setWord(string word)
+void GameState::setWord(string word)
 {
 	
 	_word_in_play = word;
-	if (word != "")
-	{	
-		_guessed = "";
-		_letters_incorrectly_guessed = "";
-		_words_incorrectly_guessed = "";
+
+	_guessed = "";
+	_letters_incorrectly_guessed = "";
+	_words_incorrectly_guessed = "";
 
 
-		_attempts_left = word.length();
-		for (int i = 0; i < word.length(); i++)
-			_guessed += "_";
-		
-		return true;
-	}
-
-	return false;
+	_attempts_left = word.length();
+	for (int i = 0; i < word.length(); i++)
+		_guessed += "_";
 }
 
 

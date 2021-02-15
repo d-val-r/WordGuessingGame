@@ -29,8 +29,11 @@ void printProgress(GameState& g, string name)
 	string words = g.getIncorrectWords();
 	string characters = g.getIncorrectLetters();
 
+
+	// prints out space-delimited status of the state of the guessed word
 	for (int i = 0; i < guess.length(); i++)
 		cout << guess[i] << " ";
+	
 	cout << "\n\n";
 
 	cout << name << ", you have " << attempts << " attempts left." << endl << endl;
@@ -44,7 +47,7 @@ void printProgress(string guess)
 // pre: parameter is the current status of the guessed word
 // post: no changes to variables
 // desc: overloaded function, formats and prints only the status of the 
-//       user's guessed word
+//       user's guessed word 
 {
 	for (int i = 0; i < guess.length(); i++)
 		cout << guess[i] << " ";
@@ -126,14 +129,13 @@ int main()
 			dict.populateFromFile(file);
 		}	
 			
-		
-		// sets a word for the user to guess and checks if the 
-		// word was an empty string (would return false if so)
-		if (g.setWord(dict.access()))
+		string win_word = dict.access();	
+
+		if (win_word != "")
 		{
 		
 			won = false;
-			
+			g.setWord(win_word);	
 
 			// prints dashes to represent length of the word
 			printProgress(g.getStatus());	
@@ -142,7 +144,7 @@ int main()
 			// has not guessed the right word, and while the characters
 			// guessed do not spell out the correct word
 			while (g.getAttempts() > 0 && !won 
-					&& g.getStatus() != g.getWinWord())
+					&& g.getStatus() != win_word)
 			{
 			
 				cout << "Guess a word or a letter: ";
@@ -173,14 +175,14 @@ int main()
 
 			// checks if the above loop exited due to a win condition,
 			// as opposed to the user running out of attempts
-			if (g.getStatus() == g.getWinWord() || won)
+			if (g.getStatus() == win_word || won)
 			{
 				p.incrementWins();
 				printWin(p);
-			} else if (g.getAttempts() == 0 && !won)
+			} else if (g.getAttempts() == 0)
 			{
 				p.incrementLosses();
-				printLoss(p, g.getWinWord());
+				printLoss(p, win_word);
 			}
 
 		}	

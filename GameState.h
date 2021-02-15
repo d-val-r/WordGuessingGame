@@ -44,14 +44,13 @@ public:
 	//       if the guess was incorrect, also appends the character
 	//       to _letters_incorrectly_guessed
 	
-	bool setWord(string);
+	void setWord(string);
 	// pre: the parameter is the word that needs to be guessed
-	// post: sets _word_in_play to the argument provided and returns true
-	// 	 otherwise, returns false if the word provided was an empty 
-	// 	 string
+	// post: sets _word_in_play to the argument provided
 	// desc: will clear the _guessed, _words_incorrectly_guessed,
 	//       and _letters_incorrectly_guessed variables to start a new 
-	//       game without requiring a new GameState object to be instantiated
+	//       game without requiring a new GameState object to be 
+	//       instantiated again
 
 	void decrementAttempts();
 	// pre: none
